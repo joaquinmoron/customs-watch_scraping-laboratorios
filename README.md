@@ -100,6 +100,15 @@ pytest
 | `test_normalizar_porcentaje_dato_ausente` | Que un valor sin dato (representado como `"-"` en la web) se interpreta como `None`, y no genera un error ni se confunde con un valor numérico. |
 | `test_normalizar_porcentaje_cero_real` | Que un valor de `"0.00%"` se interpreta como un cero real (`0.0`), diferenciándolo explícitamente de la ausencia de dato (`None`). Esta distinción es central en el diseño del pipeline: un dato faltante nunca se representa como cero. |
 
+## Unidades de los datos guardados
+
+| Campo | Unidad / formato |
+|---|---|
+| `main_share_price` | Número decimal, en la moneda indicada por `currency` (sin símbolo, sin separador de miles) |
+| `market_cap` | Número decimal, expresado en unidades monetarias completas (ej. `1.03T` se guarda como `1030000000000.0`), no en millones ni billones abreviados |
+| `week_52_price_change` | Número decimal que representa el porcentaje directamente (ej. `51.68` equivale a 51.68%, no a 0.5168) |
+| `extracted_at_utc` | Fecha y hora en formato ISO 8601, huso horario UTC |
+
 ## Limitaciones conocidas
 
 - **Dependencia de la estructura HTML de Stock Analysis.** El scraper utiliza selectores CSS
